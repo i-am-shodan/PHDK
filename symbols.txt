@@ -1,7 +1,0 @@
-malloc = 0xA0007F7C;
-getDisplayAPI = 0xA0340000;
-displayTxt = 0xA0340304;
-initFileAPI = 0xA0146C18;
-getFileAPI = 0xA02AC398;
-free = 0xA0007F98;
-dumpMem = 0xA0145FA4;
