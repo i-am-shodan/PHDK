@@ -34,3 +34,4 @@ patch.elf
 PHDK.opensdf
 PHDK.sdf
 Program.o
+ipch/**

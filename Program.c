@@ -9,8 +9,8 @@
 #define BUFFER_SIZE 0x10000
 //#define BASE_ADDR 0xA0000000
 //#define END_ADDR 0xA0C30000
-#define BASE_ADDR 0x80000000
-#define END_ADDR 0x90000000
+#define BASE_ADDR 0x60000000
+#define END_ADDR  0x60010000
 
 int dumpMem(void* unusedA, void* unusedB)
 {
