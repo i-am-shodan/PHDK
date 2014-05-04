@@ -1,6 +1,7 @@
 #pragma once
 
-void threadSleep(int timeInMs);
+typedef void(*xTHREADWAIT)(int timeInMs);
+#define threadWait ((xTHREADWAIT)SYM_THREADWAIT)
 
 int GetCameraDebugId();
 
