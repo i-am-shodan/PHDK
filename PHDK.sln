@@ -11,6 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{3AB6B0CD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeBin", "..\MergeBin\MergeBin.csproj", "{986810FD-9CC1-4095-A466-4969A94A6519}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FWPatches", "FWPatches\FWPatches.vcxproj", "{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Symbols", "Symbols", "{5E76D8A2-E6E1-4C30-88FE-59D8680B8D0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "K30", "K30", "{DAF5606B-0FD5-4DC7-B9D5-52DE493B03AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.5", "1.5", "{03D8E1A7-6D31-408E-9475-C004EB73886A}"
+	ProjectSection(SolutionItems) = preProject
+		firmware\K30\1.5\symbols.h = firmware\K30\1.5\symbols.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,11 +62,23 @@ Global
 		{986810FD-9CC1-4095-A466-4969A94A6519}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{986810FD-9CC1-4095-A466-4969A94A6519}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{986810FD-9CC1-4095-A466-4969A94A6519}.Release|Win32.ActiveCfg = Release|Any CPU
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Debug|Win32.Build.0 = Debug|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Release|Any CPU.ActiveCfg = Release|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Release|Win32.ActiveCfg = Release|Win32
+		{EDCD7469-CB3E-4D25-910E-1F1D8AD917BA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{986810FD-9CC1-4095-A466-4969A94A6519} = {3AB6B0CD-51EA-493F-BFEC-CD2B98653700}
+		{DAF5606B-0FD5-4DC7-B9D5-52DE493B03AD} = {5E76D8A2-E6E1-4C30-88FE-59D8680B8D0C}
+		{03D8E1A7-6D31-408E-9475-C004EB73886A} = {DAF5606B-0FD5-4DC7-B9D5-52DE493B03AD}
 	EndGlobalSection
 EndGlobal

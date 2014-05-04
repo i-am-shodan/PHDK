@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common.h" />
     <ClInclude Include="..\Display.h" />
     <ClInclude Include="..\Execution.h" />
     <ClInclude Include="..\File.h" />

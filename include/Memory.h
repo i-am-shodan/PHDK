@@ -1,6 +1,9 @@
 #pragma once
 
-typedef unsigned long size_t;
+#include "Common.h"
 
-extern void* malloc(size_t size);
-void free(void*);
+typedef void*(*xMALLOC)(size_t size);
+typedef void(*xFREE)(void*);
+
+#define malloc ((xMALLOC)SYM_MALLOC)
+#define free ((xFREE)SYM_FREE)

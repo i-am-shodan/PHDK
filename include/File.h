@@ -42,5 +42,8 @@ typedef struct FILECLASS {
 	FILEAPI* api;
 } FILECLASS;
 
-FILEREF initFileAPI();
-struct FILECLASS* getFileAPI(FILEREF ref);
+typedef FILEREF(*xINITFILEAPI)();
+typedef struct FILECLASS*(*xGETFILEAPI)(FILEREF ref);
+
+#define initFileAPI ((xINITFILEAPI)SYM_INITFILEAPI)
+#define getFileAPI ((xGETFILEAPI)SYM_GETFILEAPI)
