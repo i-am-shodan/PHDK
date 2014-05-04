@@ -35,3 +35,4 @@ PHDK.opensdf
 PHDK.sdf
 Program.o
 ipch/**
+temp/
