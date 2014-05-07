@@ -24,14 +24,14 @@ typedef void(*xDISPLAYICONTXT)(void*, char *);
 
 void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 {
-	char buffer[2];
+	//char buffer[2];
 	void* api;
 	//int* apix;
 	//int t;
 	//void* newFunc;
 	//int v3;
 
-	//char* buffer;
+	char* buffer;
 
 	switch (button)
 	{
@@ -64,14 +64,26 @@ void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 			   //((VOID_TWO_PARAM)newFunc)(apix, v3);
 
 			   //sprintf(&buffer[0], "k:%d", button);
-			buffer[0] = 'k';
-			buffer[1] = '\0';
+			//buffer[0] = 'k';
+			//buffer[1] = '\0';
 
-			//buffer = (char*) malloc(15);
-			//sprintf(buffer, "hello", button);
-			api = iconDisplayAPI(this, 0x1406002);
-			iconDisplayTxt(api, &buffer[0]);
-			free(buffer);
+			buffer = (char*) malloc(150);
+
+			if (buffer != NULL)
+			{
+				//sprintf(buffer, "%s", "hello");
+
+				*(buffer + 0) = 'h';
+				*(buffer + 1) = '\0';
+				//*(buffer + 2) = 'l';
+				//*(buffer + 3) = 'l';
+				//*(buffer + 4) = 'o';
+				//*(buffer + 5) = '\0';
+
+				api = iconDisplayAPI(this, 0x1406002);
+				iconDisplayTxt(api, buffer);
+				free(buffer);
+			}
 			break;
 		default:
 			break;
