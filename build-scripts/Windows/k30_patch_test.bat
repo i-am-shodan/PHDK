@@ -6,7 +6,7 @@ set FILENAME=test
 set SOURCE_DIR=FWPatches\testing\
 set SOURCE=%SOURCE_DIR%%FILENAME%.c
 set TEMP=.\temp\
-set PATCHPOINT=6502392
+set PATCHPOINT=10670704
 set OUTNAME=fwdc215b.bin
 set OUTDIR=release\test
 
@@ -27,7 +27,7 @@ arm-none-eabi-objcopy -j .rodata -O binary -I elf32-big patch.elf firmware-rodat
 copy /b firmware-text.text+firmware-rodata.text out.bin
 
 ..\tools\MergeBin out.bin out_fw_decrypt.bin %PATCHPOINT%
-..\tools\MergeBin ..\%SOURCE_DIR%patch_0xA08E77B8 out_fw_decrypt.bin 9336760
+..\tools\MergeBin ..\%SOURCE_DIR%patch_0xA0678860 out_fw_decrypt.bin 6785120
 cd ..\tools
 FirmwareTools.exe -in=..\%TEMP%out_fw_decrypt.bin -out=..\%TEMP%out_fw_decrypt_fixed.bin -f
 FirmwareTools.exe -in=..\%TEMP%out_fw_decrypt_fixed.bin -out=..\%TEMP%out_fw_decrypt_fixed_encrypted.bin -e
