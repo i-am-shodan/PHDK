@@ -32,6 +32,7 @@ void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 	//int v3;
 
 	char* buffer;
+	const char* HELLO = "HELLO";
 
 	switch (button)
 	{
@@ -57,28 +58,12 @@ void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 		case 24:
 		case 34:
 		case 35:
-			//apix = (int*)iconDisplayAPI(this, 0x1406001);
-			//v3 = ((INT_ONE_PARAM)0xA02A6F84)(apix) ^ 1;	
-			
-			   //newFunc = apix + 12;
-			   //((VOID_TWO_PARAM)newFunc)(apix, v3);
-
-			   //sprintf(&buffer[0], "k:%d", button);
-			//buffer[0] = 'k';
-			//buffer[1] = '\0';
-
 			buffer = (char*) malloc(150);
 
 			if (buffer != NULL)
 			{
-				//sprintf(buffer, "%s", "hello");
-
-				*(buffer + 0) = 'h';
-				*(buffer + 1) = '\0';
-				//*(buffer + 2) = 'l';
-				//*(buffer + 3) = 'l';
-				//*(buffer + 4) = 'o';
-				//*(buffer + 5) = '\0';
+				//sprintf(buffer, "%s", "h");
+				strcpy(buffer, HELLO);
 
 				api = iconDisplayAPI(this, 0x1406002);
 				iconDisplayTxt(api, buffer);
