@@ -6,7 +6,7 @@ set FILENAME=test
 set SOURCE_DIR=FWPatches\testing\
 set SOURCE=%SOURCE_DIR%%FILENAME%.c
 set TEMP=.\temp\
-set PATCHPOINT=1335632
+set PATCHPOINT=6502392
 set OUTNAME=fwdc215b.bin
 set OUTDIR=release\test
 
@@ -16,7 +16,7 @@ md %TEMP%
 REM copy original firmware to temp dir
 copy %FIRMWARE_BIN% %TEMP%out_fw_decrypt.bin
 
-arm-none-eabi-gcc -mbig-endian -mtune=cortex-m4 -c %SOURCE% -I. -I%FIRMWARE_DIR%
+arm-none-eabi-gcc -Os -mbig-endian -mtune=cortex-m4 -c %SOURCE% -I. -I%FIRMWARE_DIR%
 move %FILENAME%.o %TEMP%
 
 cd %TEMP%
