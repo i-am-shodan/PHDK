@@ -10,6 +10,13 @@ typedef void(*xCLEARSCREEN)(SCREEN_LOCATION screen);
 #define displayTxt ((xDISPLAYTXT)SYM_DISPLAYTXT)
 #define clearScreen ((xCLEARSCREEN)SYM_CLEARSCREEN)
 
+typedef void*(*xICONDISPLAYAPI)(const void*, int);
+#define iconDisplayAPI ((xICONDISPLAYAPI)SYM_ICONDISPLAYAPI)
+
+typedef void(*xDISPLAYICONTXT)(const void*, char *);
+#define iconDisplayTxt ((xDISPLAYICONTXT)SYM_ICONDISPLAYTXT)
+
+
 // this_param - this ptr
 // line - Line on which the text should be display
 //		  1=Top line, 

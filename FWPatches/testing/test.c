@@ -8,31 +8,29 @@
 
 #include "symbols.h"
 
-typedef void*(*xICONDISPLAYAPI)(void*, int);
-#define iconDisplayAPI ((xICONDISPLAYAPI)0xA00D3D20)
 
-typedef void* (*NO_PARAM)(void);
+
+//typedef void* (*NO_PARAM)(void);
 //#define UnknownNoArgs ((showRebuildFirmwareMessage)0xA01A0A8C)
 
-typedef void (*VOID_ONE_PARAM)(void*);
-typedef void (*VOID_TWO_PARAM)(void*, int);
-typedef void (*VOID_THREE_PARAM)(void*, int, int);
-typedef int(*INT_ONE_PARAM)(void*);
+//typedef void (*VOID_ONE_PARAM)(void*);
+//typedef void (*VOID_TWO_PARAM)(void*, int);
+//typedef void (*VOID_THREE_PARAM)(void*, int, int);
+//typedef int(*INT_ONE_PARAM)(void*);
 
-typedef void(*xDISPLAYICONTXT)(void*, char *);
-#define iconDisplayTxt ((xDISPLAYICONTXT)0xA01A9FE8)
+int index = 0;
 
 void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 {
-	//char buffer[2];
+	/*
 	void* api;
-	//int* apix;
-	//int t;
-	//void* newFunc;
-	//int v3;
 
 	char* buffer;
-	const char* HELLO = "HELLO";
+	const char* LINE_1 = "LOOKS LIKE";
+	const char* LINE_2 = "IM RUNNING";
+	const char* LINE_3 = "CODE ON";
+	const char* LINE_4 = "MY K30";
+	const char* LINE_5 = "SHODAN!";
 
 	switch (button)
 	{
@@ -62,15 +60,27 @@ void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 
 			if (buffer != NULL)
 			{
-				//sprintf(buffer, "%s", "h");
-				strcpy(buffer, HELLO);
-
 				api = iconDisplayAPI(this, 0x1406002);
+				char * line;
+				switch (index)
+				{
+				case 0: line = LINE_1; break;
+				case 1: line = LINE_2; break;
+				case 2: line = LINE_3; break;
+				case 3: line = LINE_4; break;
+				case 4: line = LINE_5; break;
+				default: line = LINE_1; index = 0; break;
+				}
+
+				++index;
+
+				sprintf(buffer, line);
 				iconDisplayTxt(api, buffer);
+
 				free(buffer);
 			}
 			break;
 		default:
 			break;
-	}
+	}*/
 }
