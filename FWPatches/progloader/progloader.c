@@ -2,62 +2,122 @@
 #include "include\Memory.h"
 #include "include\File.h"
 #include "include\Execution.h"
+#include "include\Display.h" 
+#include "include\Strings.h"
 
 #include "symbols.h"
 
-#define BUFFER_SIZE 0x10000
+#define PARASITE_PATCH_LOCATION 0xA0A2D670
+#define ALREADY_EXECUTED_VALUE 9723
 
-int programLoader()
+int alreadyExecuted;
+
+void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 {
-	int ret = 0;
-	unsigned char* buffer;
 	FILEHANDLE handle = 0;
+	int loaded = 0;
+	const char* filename = "C:\\PHDK.BIN";
 
-	FILEREF fileRef = initFileAPI();
-	FILECLASS *fileAPI = getFileAPI(fileRef);
+	const FILEREF fileRef = initFileAPI();
+	const FILECLASS *fileAPI = getFileAPI(fileRef);
+
+	const void* api = iconDisplayAPI(this, 0x1406002);
 
 	do
 	{
-		// TODO get file size
-		unsigned int fileSize = 0;
+		FILE file;
 
-		if (!fileAPI->api->OpenFileHandle(fileAPI, "C:\\PHDK.BIN", FILE_MODE_READ, &handle))
+		if (button == 10)
 		{
+			// i wonder if this is the info button, it seems to interact with the same
+			// id used in the display code. Maybe you register some text to be rendered later
+			// on demand?
+
+			// think this is some rendering thing
+			((VOID_THREE_PARAM)0xA063333C)(this, 0, 0); //sub_A063333C(this, 0, 0);
+			break;
+		}
+		else if (button == 20)
+		{
+			// power button or OK
+			((VOID_TWO_PARAM)0xA00D3C48)(this, 3);//iconTest::unknownG(this_param, 3);
+			break;
+		}
+		else if (button == 9)
+		{
+			// power button or OK
+			((VOID_TWO_PARAM)0xA00D3C70)(this, 1); // sub_A00D3C70(this_param, 1);
+			break;
+		}
+		else if (
+			button != 21 &&
+			button != 22 &&
+			button != 23 &&
+			button != 24 &&
+			button != 34 &&
+			button != 35)
+		{
+			char* buffer = (char*)malloc(150);
+			if (buffer != NULL)
+			{
+				sprintf(buffer, "invalid key: %d", button);
+				iconDisplayTxt(api, buffer);
+				free(buffer);
+			}
 			break;
 		}
 
-		// we add 4 bytes as this gives us the room to ensure
-		// any code is aligned correctly
-		buffer = (unsigned char*)malloc(fileSize + 4);
-		unsigned char* startOfCode = buffer;
-
-		// need to ensure that we start executing from an aligned address
-		// we do this by keep adding a byte until addr % 4 == 0
-		while ( (unsigned int) startOfCode % 4 != 0)
+		if (alreadyExecuted == ALREADY_EXECUTED_VALUE)
 		{
-			++startOfCode;
+			iconDisplayTxt(api, "Error: already executed");
+			break;
+		}
+
+		// great we have been called by a valid button press
+		fileCtor(&file);
+		if (!loadFile(fileAPI, filename, &file))
+		{
+			iconDisplayTxt(api, "Error: loadFile failed");
+			fileDtor(&file);
+			break;
+		}
+
+		int fileSize = getFileSize(&file);
+		fileDtor(&file);
+
+		if (fileSize == 0 || fileSize > 2048)
+		{
+			iconDisplayTxt(api, "Error: file size invalid");
+			break;
+		}
+
+		if (!fileAPI->api->OpenFileHandle(fileAPI, filename, FILE_MODE_READ, &handle))
+		{
+			iconDisplayTxt(api, "Error: file open failed");
+			break;
 		}
 		
 		// now load the file into memory
-		if (fileAPI->api->ReadFile(fileAPI, handle, startOfCode, fileSize)) // hmmmm filesize
+		if (!fileAPI->api->ReadFile(fileAPI, handle, (unsigned char*) PARASITE_PATCH_LOCATION, fileSize))
 		{
+			iconDisplayTxt(api, "Error: read file failed");
 			break;
 		}
 
-		// now execute our code
-		((EXECUTE)startOfCode)();
+		loaded = TRUE;
 
-	} while (0);
-	
-	if (buffer != NULL)
-	{
-		free(buffer);
-	}
+	} while (FALSE);
 
 	if (handle != 0)
 	{
 		fileAPI->api->CloseFileHandle(fileAPI, handle);
 	}
 
-	return ret;
+	if (loaded)
+	{
+		// now execute our code
+		iconDisplayTxt(api, "Code executed");
+		((EXECUTE)PARASITE_PATCH_LOCATION)(this, button);
+		alreadyExecuted = ALREADY_EXECUTED_VALUE;
+	}
 }

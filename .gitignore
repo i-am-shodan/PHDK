@@ -36,3 +36,4 @@ PHDK.sdf
 Program.o
 ipch/**
 temp/
+temp/dump.o

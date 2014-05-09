@@ -2,13 +2,13 @@ cd ..\..\
 set PATH=%PATH%;%CD%\gcc-arm-none-eabi\bin
 set FIRMWARE_DIR=.\firmware\K30\1.5\
 set FIRMWARE_BIN=%FIRMWARE_DIR%decrypted.bin
-set FILENAME=test
-set SOURCE_DIR=FWPatches\testing\
+set FILENAME=progloader
+set SOURCE_DIR=FWPatches\progloader\
 set SOURCE=%SOURCE_DIR%%FILENAME%.c
 set TEMP=.\temp\
 set PATCHPOINT=10670704
 set OUTNAME=fwdc215b.bin
-set OUTDIR=release\test
+set OUTDIR=release\loader
 
 rmdir /S /Q %TEMP%
 md %TEMP%
