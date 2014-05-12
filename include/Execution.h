@@ -1,3 +1,3 @@
 #pragma once
 
-typedef void(*EXECUTE)(void *this_original_caller, int button_pressed);
+typedef void(*EXECUTE)(void *this_original_caller, int button_pressed, int firstRun);

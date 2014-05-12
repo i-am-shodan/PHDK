@@ -10,12 +10,10 @@
 #define PARASITE_PATCH_LOCATION 0xA0A2D670
 #define ALREADY_EXECUTED_VALUE 9723
 
-int alreadyExecuted;
-
 void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 {
 	FILEHANDLE handle = 0;
-	int loaded = 0;
+	int justLoadedFromSD = 0;
 	const char* filename = "C:\\PHDK.BIN";
 
 	const FILEREF fileRef = initFileAPI();
@@ -27,53 +25,13 @@ void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 	{
 		FILE file;
 
-		if (button == 10)
+		if (*(int*)PARASITE_PATCH_LOCATION != 0xFFFFFFFF)
 		{
-			// i wonder if this is the info button, it seems to interact with the same
-			// id used in the display code. Maybe you register some text to be rendered later
-			// on demand?
-
-			// think this is some rendering thing
-			((VOID_THREE_PARAM)0xA063333C)(this, 0, 0); //sub_A063333C(this, 0, 0);
-			break;
-		}
-		else if (button == 20)
-		{
-			// power button or OK
-			((VOID_TWO_PARAM)0xA00D3C48)(this, 3);//iconTest::unknownG(this_param, 3);
-			break;
-		}
-		else if (button == 9)
-		{
-			// power button or OK
-			((VOID_TWO_PARAM)0xA00D3C70)(this, 1); // sub_A00D3C70(this_param, 1);
-			break;
-		}
-		else if (
-			button != 21 &&
-			button != 22 &&
-			button != 23 &&
-			button != 24 &&
-			button != 34 &&
-			button != 35)
-		{
-			char* buffer = (char*)malloc(150);
-			if (buffer != NULL)
-			{
-				sprintf(buffer, "invalid key: %d", button);
-				iconDisplayTxt(api, buffer);
-				free(buffer);
-			}
+			// we've already loaded something from the SD card
 			break;
 		}
 
-		if (alreadyExecuted == ALREADY_EXECUTED_VALUE)
-		{
-			iconDisplayTxt(api, "Error: already executed");
-			break;
-		}
-
-		// great we have been called by a valid button press
+		// check that the file is on the SD
 		fileCtor(&file);
 		if (!loadFile(fileAPI, filename, &file))
 		{
@@ -104,7 +62,7 @@ void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 			break;
 		}
 
-		loaded = TRUE;
+		justLoadedFromSD = TRUE;
 
 	} while (FALSE);
 
@@ -113,11 +71,11 @@ void iconMenuHandleButtonPress(void *this, int button, unsigned short increment)
 		fileAPI->api->CloseFileHandle(fileAPI, handle);
 	}
 
-	if (loaded)
+	// ensure we have loaded something at our special address
+	if (*(int*)PARASITE_PATCH_LOCATION != 0xFFFFFFFF)
 	{
 		// now execute our code
 		iconDisplayTxt(api, "Code executed");
-		((EXECUTE)PARASITE_PATCH_LOCATION)(this, button);
-		alreadyExecuted = ALREADY_EXECUTED_VALUE;
+		((EXECUTE)PARASITE_PATCH_LOCATION)(this, button, justLoadedFromSD);
 	}
 }
