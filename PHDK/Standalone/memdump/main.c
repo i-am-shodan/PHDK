@@ -20,6 +20,10 @@ void button_handler(menu *caller, int button_pressed, int firstRun)
 	{
 		count = 0;
 	}
+	else
+	{
+		count++;
+	}
 
 	unsigned char* buffer = (unsigned char*)malloc(BUFFER_SIZE);
 	int ret = 0;
