@@ -55,18 +55,11 @@ void button_handler(menu *caller, int button_pressed, int firstRun)
 			char * line;
 			switch (count)
 			{
-			case 0: line = "booting Linux..."; break;
-			case 1: line = "INIT: version 2.78 booting"; break;
-			case 2: line = "Running Linux kernel 2.6.11"; break;
-			case 3: line = "OMG LULZ!!!"; break;
-			case 4: line = "Sorry! I can't boot Linux just yet..."; break;
-			case 5: line = "but I am running my own code!"; break;
-			case 6: line = "This means I have full control"; break;
-			case 7: line = "of this Pentax DSLR camera."; break;
-			case 8: line = "I realize the irony of submitting a"; break;
-			case 9: line = "Pentax hack to win a Nikon"; break;
-			case 10: line = "but hey, LOLCATZ anyone?"; break;
-			case 11: ((VOID_TWO_PARAM)0xA00D3C70)(caller,1); break;
+				case 0: line = "The camera has just loaded"; break;
+				case 1: line = "this program from the SD card!"; break;
+				case 2: line = "This means I have full control"; break;
+				case 3: line = "of this Pentax DSLR camera."; break;
+				case 4: ((VOID_TWO_PARAM)0xA00D3C70)(caller,1); break;
 			}
 
 			++count;
