@@ -1,0 +1,43 @@
+== Pentax Hacker Development Kit
+
+A CHDK (the [[http://chdk.wikia.com/wiki/CHDK|Canon Hacker Development Kit]]) for Pentax Cameras...
+
+== Status
+
+Biggest problems for creating a hacked firmware are:
+
+* Need for experienced reverse engineers
+* Cost of the required tools such as IDA Pro
+* The FP instruction set
+
+Progress so far:
+
+* Decrypted the firmware
+* Found the CPU base address (0xA0000000 and that it's a Cortex M4)
+* A lot of reverse engineering. Large parts found including memory allocation functions, displaying text on screen etc
+* Found all the debug processing code
+* Found the firmware decryption routine
+
+What is needed (so far):
+
+* Service manual for a K30 (or even a similar model). This would be really useful in understanding how all the debug functionality actually works
+* Datasheet for the MB91696AM or even a very similar ARM based CPU
+* Source code for the Pentax-hack firmware decryption tool - I want to encrypt my own firmware
+* Someone to tell me the offsets to icons/text images in the binary. This would rapidly increase the amount of functions I can find!
+
+How you can help:
+
+* I will need testers. Be warned there is a small chance of bricking the camera...
+* I need people to help with the dissasembly. You'll need a copy of IDA Pro (or maybe notepad - see below).
+* Anyone know anyone at Pentax / Ricoh. I'm considering dropping their marketing team an email.
+* Don't request features. At the moment there is only one feature - get custom code running on the device.
+* Don't request other cameras. I own a K30 and thats what i'm working on.
+
+
+== Links
+
+* Forum Thread at pentaxforums.com: [[http://www.pentaxforums.com/forums/6-pentax-dslr-discussion/250555-resurrecting-pentax-firmware-hacking.html|Resurrecting Pentax firmware hacking]]
+* PDF "Hacking the Pentax K30" by Shodan: [[https://www.dropbox.com/s/ogez7sb4b0cw92g/hacking_pentax_k30.pdf|hacking_pentax_k30.pdf]]
+* Related Github repository: [[https://github.com/i-am-shodan/PentaxFirmwareTool|Pentax Firmware tool for the K30]]
+* Wiki: [[http://phdk.wikia.com/wiki/Pentax_Hacker_Development_Kit_Wiki|Pentax Hacker Development Kit Wiki]]
+* Foreign website with many information, but no longer maintained: [[http://www.pentax-hack.info/|pentax-hack.info]]
